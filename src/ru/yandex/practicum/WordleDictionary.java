@@ -1,6 +1,9 @@
 package ru.yandex.practicum;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /*
 этот класс содержит в себе список слов List<String>
@@ -8,16 +11,21 @@ import java.util.*;
     также этот класс может содержать рутинные функции по сравнению слов, букв и т.д.
  */
 public class WordleDictionary {
-
+    GameLogger logger;
     private final Map<Integer, List<String>> wordsByLength;
     private int selectedLength;
-    private List<String> words;
 
-    public WordleDictionary(Map<Integer, List<String>> wordsByLength) {
+    //private List<String> words;
+
+    public WordleDictionary(Map<Integer, List<String>> wordsByLength, GameLogger logger) {
         this.wordsByLength = wordsByLength;
+        this.logger = logger;
     }
 
-    public String getRandomWord(int lengthWord) {
+    public String getRandomWord() {
+        if (selectedLength == 0) {
+            throw new IllegalStateException("Длина слова не выбрана.");
+        }
         List<String> words = wordsByLength.get(selectedLength);
         Random random = new Random();
         return words.get(random.nextInt(words.size()));
@@ -39,8 +47,9 @@ public class WordleDictionary {
         if (word.length() != selectedLength) {
             return false;
         }
+        word = word.toLowerCase().replace('ё', 'е');
         List<String> words = wordsByLength.get(selectedLength);
-        return words.contains(word);
+        return words != null && words.contains(word);
     }
 
     public List<String> getAllWords() {
@@ -56,9 +65,9 @@ public class WordleDictionary {
     }
 
     public boolean isValidRussianWord(String word) {
-        if (word.length() != selectedLength) {
+        if (word == null || word.length() != selectedLength) {
             return false;
         }
-        return word.matches("[а-яё]+");
+        return word.matches("[а-яА-ЯёЁ]+");
     }
 }
