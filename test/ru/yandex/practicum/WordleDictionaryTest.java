@@ -27,7 +27,7 @@ class WordleDictionaryTest {
         }
 
         testWords = new HashMap<>();
-        testWords.put(4, Arrays.asList("коты", "дома", "соня", "леса", "ёлка"));
+        testWords.put(4, Arrays.asList("коты", "дома", "соня", "леса", "ёлка", "елка"));
         testWords.put(5, Arrays.asList("герой", "гонец", "слово", "игра"));
         testWords.put(6, Arrays.asList("молоко", "корова", "собака"));
 

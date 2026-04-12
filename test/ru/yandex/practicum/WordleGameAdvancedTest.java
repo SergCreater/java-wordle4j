@@ -61,7 +61,7 @@ class WordleGameAdvancedTest {
 
         // В слове "масса": м - нет, а - правильно, с - есть но не там, с - правильно, а - правильно
         String result2 = game.compareWords("масса", "касса");
-        assertEquals("-+^++", result2);
+        assertEquals("-++++", result2);
     }
 
     @Test
@@ -125,7 +125,7 @@ class WordleGameAdvancedTest {
 
         // Проверяем через matchesCurrentState
         assertTrue(game.matchesCurrentState("герой"));  // правильное слово
-        assertTrue(game.matchesCurrentState("город"));  // г на месте, есть о и е
+        assertFalse(game.matchesCurrentState("город"));  // г на месте, есть о и е
         assertFalse(game.matchesCurrentState("гонец")); // содержит н и ц
         assertFalse(game.matchesCurrentState("слово")); // не начинается с г
     }

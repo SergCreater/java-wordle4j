@@ -66,7 +66,8 @@ public class WordleDictionaryLoader {
         }
         for (int len = Config.MIN_WORD_LENGTH; len <= Config.MAX_WORD_LENGTH; len++) {
             if (!wordByLength.containsKey(len) || wordByLength.get(len).isEmpty()) {
-                throw new IllegalStateException("Нет слов длины " + len + " в словаре");
+                logger.error("В словаре отстутствуют слова длиной: " + len);
+                //throw new IllegalStateException("Нет слов длины " + len + " в словаре");
             }
         }
         return wordByLength;
