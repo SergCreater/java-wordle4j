@@ -29,10 +29,6 @@ public class Wordle {
         } catch (IOException ex) {
             System.err.println("Не удалось создать лог-файл: " + ex.getMessage());
             return;
-//        } catch (RuntimeException ex) {
-//            logger.error("Ошибка загрузки словаря: " + ex.getMessage());
-//            System.out.println("Ошибка загрузки словаря");
-//            return;
         }
 
         System.out.println("Добро пожаловать в Wordle!");
@@ -81,7 +77,6 @@ public class Wordle {
         while (!game.isGameWon() && game.getSteps() < Config.MAX_ATTEMPTS) {
             System.out.println("У вас " + (Config.MAX_ATTEMPTS - game.getSteps()) + " попыток.");
             input = sc.nextLine().trim().toLowerCase();
-            //sc.nextLine();
             if (input.isEmpty()) {
                 if (game.hasHit()) {
                     String hit = game.getHit();
@@ -99,23 +94,11 @@ public class Wordle {
             try {
                 String result = game.makeGuess(input);
                 System.out.println("Результат: " + result);
-
-               /* if (input.equals(secret)) {
-                    System.out.println();
-                    System.out.println("Вы угадали слово! Победа!!!");
-
-                } else if (game.getSteps() <= 0) {
-                    System.out.println();
-                    System.out.println("Вам не удалось угадать загаданное слово.");
-                    System.out.println("Слово которое мы загадали: " + secret);
-
-                }*/
             } catch (IllegalArgumentException ex) {
                 System.out.println("Ошибка: " + ex.getMessage());
             } catch (IllegalStateException ex) {
                 System.out.println("Ошибка: " + ex.getMessage());
             }
-            //sc.next();
         }
         if (game.isGameWon()) {
             System.out.println("Вы угадали слово за: " + game.getSteps() + " шагов.");
@@ -127,5 +110,4 @@ public class Wordle {
         }
         sc.close();
     }
-
 }

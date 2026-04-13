@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 public class GameLogger {
+
     private PrintWriter writer;
 
     public GameLogger(String fileName) throws IOException {

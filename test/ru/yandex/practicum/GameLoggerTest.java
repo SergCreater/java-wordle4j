@@ -13,7 +13,6 @@ import static ru.yandex.practicum.Config.TEST_LOG_FILE;
 
 class GameLoggerTest {
 
-
     private GameLogger testLogger;
 
     @AfterEach

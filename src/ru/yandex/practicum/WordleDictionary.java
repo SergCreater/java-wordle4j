@@ -11,11 +11,10 @@ import java.util.Random;
     также этот класс может содержать рутинные функции по сравнению слов, букв и т.д.
  */
 public class WordleDictionary {
-    GameLogger logger;
+
+    private GameLogger logger;
     private final Map<Integer, List<String>> wordsByLength;
     private int selectedLength;
-
-    //private List<String> words;
 
     public WordleDictionary(Map<Integer, List<String>> wordsByLength, GameLogger logger) {
         this.wordsByLength = wordsByLength;

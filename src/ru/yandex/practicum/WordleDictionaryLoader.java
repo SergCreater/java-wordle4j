@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import static jdk.internal.reflect.ConstantPool.Tag.UTF8;
 
 /*
 этот класс содержит в себе всю рутину по работе с файлами словарей и с кодировками
@@ -22,14 +21,14 @@ import java.util.Map;
     на выходе должен быть класс WordleDictionary
  */
 public class WordleDictionaryLoader {
-    GameLogger logger;
+
+    private GameLogger logger;
+    private Path filePath = Paths.get(Config.DICTIONARY_FILE_PATH);
+    private Map<Integer, List<String>> wordByLength;
 
     public WordleDictionaryLoader(GameLogger logger) {
         this.logger = logger;
     }
-
-    //private Map<Integer, List<String>> wordByLength;
-    Path filePath = Paths.get(Config.DICTIONARY_FILE_PATH);
 
     public Map<Integer, List<String>> loadDictionary() throws SystemException {
         logger.info("Загрузка словаря из файла: " + Config.DICTIONARY_FILE_PATH);
@@ -38,7 +37,7 @@ public class WordleDictionaryLoader {
             throw new SystemException("Файл словаря не найден: " + Config.DICTIONARY_FILE_PATH);
         }
         logger.info("Файл загружен.");
-        Map<Integer, List<String>> wordByLength = new HashMap<>();
+        wordByLength = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
                 new FileInputStream(Config.DICTIONARY_FILE_PATH), StandardCharsets.UTF_8))) {
@@ -67,14 +66,8 @@ public class WordleDictionaryLoader {
         for (int len = Config.MIN_WORD_LENGTH; len <= Config.MAX_WORD_LENGTH; len++) {
             if (!wordByLength.containsKey(len) || wordByLength.get(len).isEmpty()) {
                 logger.error("В словаре отстутствуют слова длиной: " + len);
-                //throw new IllegalStateException("Нет слов длины " + len + " в словаре");
             }
         }
         return wordByLength;
     }
-
-   /* public List<String> getAllWord(int length){
-        List<String> words = wordByLength.get(length);
-        return words == null ? new ArrayList<>() : new ArrayList<>(words);
-    }*/
 }
